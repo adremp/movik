@@ -1,1 +1,1 @@
-export * as baseUrl from "./base-url";
+export * as urls from "./base-url";

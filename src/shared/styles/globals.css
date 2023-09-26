@@ -9,5 +9,5 @@ html {
 
 body {
 	background-color: grey;
-	@apply px-12 md:px-36 md:py-12 py-8
+	@apply h-screen overflow-hidden flex flex-col
 }

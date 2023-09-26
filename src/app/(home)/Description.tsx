@@ -5,13 +5,14 @@ import WatchTrailerButton from "@/features/WatchTrailerButton";
 import { useAppSelector } from "@/stores";
 import styled from "styled-components";
 
-interface MediaDescriptionProps {
+interface DescriptionProps {
   className?: string;
 }
 
-const Description = (props: MediaDescriptionProps) => {
+const Description = (props: DescriptionProps) => {
+	const mainMedia = useAppSelector((s) => s.home.mainMedia)
 
-	const state = useAppSelector((s) => s.home)
+	if (!mainMedia) return <>ОШИБКА ЗАГРУЗКИ</>
 
   const endBlock = (
     <ActionBlock>
@@ -23,8 +24,8 @@ const Description = (props: MediaDescriptionProps) => {
 
   return (
     <MediaDescription
-      title={state.title}
-      description={state.description}
+      title={mainMedia.title}
+      description={mainMedia.overview}
       endChild={endBlock}
     />
   );

@@ -1,9 +1,18 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin")
+
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+			spacing: {
+				page: "4rem"
+			}
+		},
   },
-  plugins: [],
+	plugins: [plugin(({ addVariant }) => {
+		addVariant('child', '& > *')
+	})],
 };
 

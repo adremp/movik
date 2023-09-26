@@ -19,6 +19,7 @@ const MediaDescription = (props: MediaDescriptionProps) => {
 };
 
 const Wrapper = styled.div`
+padding: 0 2rem;
   max-width: 65ch;
 	z-index: 2;
 `;

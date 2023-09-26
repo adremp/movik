@@ -1,8 +1,8 @@
 import { AppProviders } from "@/providers";
-import { getTopRated } from "@/shared/api";
-import getFullTMDBImgPath from "@/shared/helpers/getFullTMDBImgPath";
+import { mapDiscoverMovie } from "@/shared/api/maps";
+import { mockDiscover } from "@/shared/const/mock";
 import "@/shared/styles/globals.css";
-import dayjs from "dayjs";
+import { MediaDataType } from "@/stores/home";
 import type { Metadata } from "next";
 import { Public_Sans, Staatliches } from "next/font/google";
 
@@ -10,14 +10,14 @@ const staatliches = Staatliches({
   subsets: ["latin"],
   style: ["normal"],
   weight: ["400"],
-	variable: '--font-staatliches'
+  variable: "--font-staatliches",
 });
 
 const publicSans = Public_Sans({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
-	variable: '--font-public-sans',
+  variable: "--font-public-sans",
 });
 
 export const metadata: Metadata = {
@@ -30,8 +30,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const resp = await getTopRated();
-  const movie = resp.results[3];
+  const mediaData: MediaDataType[] = [];
+
+  const popularLastMonth = mockDiscover;
+  // const popularLastMonth = await fetchMedia("movieDiscover", {
+  //   "release_date.gte": dayjs().subtract(1, "month").toISOString(),
+  //   sort_by: "popularity.desc",
+  // });
+  mediaData.push({
+    data: popularLastMonth.results.map(mapDiscoverMovie),
+    title: "Popular Last Month 1",
+  });
+  const mainMedia = mediaData[0].data[1];
 
   return (
     <html lang="en">
@@ -39,12 +49,9 @@ export default async function RootLayout({
         <AppProviders
           initialState={{
             home: {
-              movies: resp.results,
-              backgroundUrl: getFullTMDBImgPath(movie.backdrop_path),
-              title: movie.title,
-              description: movie.overview,
-              yearRaw: dayjs(movie.release_date).year().toString(),
-							contentType: 'all'
+              mainMedia,
+              contentType: "all",
+              mediaData,
             },
           }}
         >

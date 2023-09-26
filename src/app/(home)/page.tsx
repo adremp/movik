@@ -1,23 +1,25 @@
 "use client";
 
+import { BackgroundFilter, BackgroundImage, ScrollableContainer } from "@/components/common";
 import { useAppSelector } from "@/stores";
 import HeaderNav from "@/widgets/HeaderNav";
 import MediaListBlock from "@/widgets/MediaListBlock";
-import Image from "next/image";
-import Description from "./MediaDescription";
-import { BackgroundFilter } from "@/components/common";
+import styled from "styled-components";
+import Description from "./Description";
 
-export default function Home() {
-  const bgImg = useAppSelector((s) => s.home.backgroundUrl);
+export const Home = () => {
+  const bgUrl = useAppSelector((s) => s.home.mainMedia?.backdrop_path);
   return (
     <>
-      <Image className="-z-10 object-cover" src={bgImg} alt="" fill />
+      {bgUrl && <BackgroundImage src={bgUrl} alt="" />}
       <BackgroundFilter />
       <HeaderNav />
-      <main>
+      <ScrollableContainer>
         <Description />
         <MediaListBlock />
-      </main>
-    </> 	
+      </ScrollableContainer>
+    </>
   );
-}
+};
+
+export default Home;

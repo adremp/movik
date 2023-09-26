@@ -1,28 +1,20 @@
-import {
-  PayloadAction,
-  bindActionCreators,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { TopRatedMovie } from "./../../shared/api/types";
+import createActions from "@/shared/helpers/createActions";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Media } from "../types";
+
+export type MediaDataType = {
+  title: string;
+  data: Media[];
+};
 
 export interface HomeState {
   contentType: "all" | "show" | "movie" | "favorite";
-	backgroundUrl: string
-	title: string
-	description: string
-	yearRaw: string
-  movies: TopRatedMovie[];
+  mainMedia?: Media;
+  mediaData?: MediaDataType[];
 }
 
 const initialState: HomeState = {
   contentType: "all",
-  movies: [],
-	title: '',
-	backgroundUrl: '',
-	description: '',
-	yearRaw: ''
 };
 
 export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
@@ -35,7 +27,4 @@ export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
     }),
   },
 });
-export const useHomeActions = (): typeof HomeActions => {
-  const dispatch = useDispatch();
-  return useMemo(() => bindActionCreators(HomeActions, dispatch), []);
-};
+export const useHomeActions = createActions(HomeActions);

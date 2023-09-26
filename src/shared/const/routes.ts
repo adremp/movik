@@ -1,7 +1,7 @@
 export default {
   home: () => "/",
-  show: (id: string = ":id") => `/show/${id}`,
-  film: (id: string = ":id") => `/film/${id}`,
+  show: (id: number | string = ":id") => `/show/${id}`,
+  movie: (id: number | string = ":id") => `/movie/${id}`,
   search: () => "/search",
-	favorite: () => "/favorite"
+  favorite: () => "/favorite",
 };
