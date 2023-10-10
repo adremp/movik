@@ -1,6 +1,6 @@
-import { DiscoverMovieResponse } from "../api/types";
+import { MovieDiscoverResponse } from "../api/types/movieDiscover";
 
-export const mockDiscover: DiscoverMovieResponse = {
+export const mockDiscover: MovieDiscoverResponse = {
   page: 1,
   results: [
     {

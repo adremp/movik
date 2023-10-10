@@ -1,43 +1,39 @@
-import { TextButton } from "@/components/button";
-import { useAppSelector } from "@/stores";
-import { HomeState, useHomeActions } from "@/stores/home";
-import styled from "styled-components";
+import { cx } from "class-variance-authority";
 
-// [title, type]
-type ItemType = [string, HomeState["contentType"]];
-const items: ItemType[] = [
-  ["all", "all"],
-  ["tv show", "show"],
-  ["movie", "movie"],
-  ["favorite", "favorite"],
-];
+interface HeaderNavProps {
+  className?: string;
+}
 
-const HeaderNav = () => {
-  const currentType = useAppSelector((s) => s.home.contentType);
-  const { set } = useHomeActions();
-
+const HeaderNav = (props: HeaderNavProps) => {
   return (
-    <Wrapper>
-      {items.map(([title, type]) => (
-        <TextButton
-          isActive={type === currentType}
-          key={title}
-          onClick={() => set({ contentType: type })}
-        >
+    <div className={cx("inline-flex gap-23 h-min", props.className)}>
+      {/* {items.map(([title, href]) => (
+        <Link className={text({ size: "40" }, 'whitespace-nowrap')} href={href} key={title}>
           {title}
-        </TextButton>
-      ))}
-    </Wrapper>
+        </Link>
+      ))} */}
+    </div>
   );
+  // return (
+  //   <div className="main">
+  // {items.map(([title, type]) => (
+  // <TextButton
+  //   isActive={type === currentType}
+  //   key={title}
+  //   onClick={() => set({ contentType: type })}
+  // >
+  //   {title}
+  // </TextButton>
+  // ))}
+  //   </div>
+  // );
 };
 
-const Wrapper = styled.div`
-  font-family: var(--font-staatliches);
-  display: flex;
-  gap: 1.5rem;
-	padding: 0 2rem;
-  margin-bottom: 3rem;
-	margin-top: 2rem;
-`;
+// const Container = styled.div`
+//   gap: 1.5rem;
+//   padding: 0 2rem;
+//   margin-bottom: 3rem;
+//   margin-top: 2rem;
+// `;
 
 export default HeaderNav;

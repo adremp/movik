@@ -1,56 +1,25 @@
+import text from "@/shared/styles/text";
+import { cx } from "class-variance-authority";
 import { ReactNode } from "react";
-import styled from "styled-components";
 
 interface MediaDescriptionProps {
   title: string;
   description: string;
   infoChild?: ReactNode;
-  endChild?: ReactNode;
+  bottomChild?: ReactNode;
+	className?: string
 }
 const MediaDescription = (props: MediaDescriptionProps) => {
   return (
-    <Wrapper>
-      <Title>{props.title}</Title>
-      <InfoWrapper>{props.infoChild}</InfoWrapper>
-      <Description>{props.description}</Description>
-      {props.endChild}
-    </Wrapper>
+    <div className={cx("max-w-[65ch] z-[1] text-text-primary", props.className)}>
+      <h1 className={text({ size: "100" })}>{props.title}</h1>
+      <div className={text({ size: "20-400" }, "mt-35 tracking-[-0.1px]")}>
+        {props.infoChild}
+      </div>
+      <p className={text({ size: "20-400" }, "mt-19")}>{props.description}</p>
+      {props.bottomChild}
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-padding: 0 2rem;
-  max-width: 65ch;
-	z-index: 2;
-`;
-
-const Title = styled.h1`
-  color: #fff;
-  font-family: var(--font-staatliches);
-  font-size: 7rem;
-  line-height: 90%;
-  letter-spacing: -0.14rem;
-  text-transform: uppercase;
-`;
-
-const Description = styled.p`
-  margin-top: 2rem;
-  margin-bottom: 2.5rem;
-  color: #fff;
-  font-size: 1.25rem;
-  line-height: 132%;
-  letter-spacing: -0.0125rem;
-`;
-
-const InfoWrapper = styled.div`
-  margin-top: 2rem;
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.0125rem;
-`;
 
 export default MediaDescription;

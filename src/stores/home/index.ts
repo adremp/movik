@@ -1,6 +1,6 @@
-import createActions from "@/shared/helpers/createActions";
+import { Media } from "@/shared/api/types";
+import createActions from "@/shared/utils/createActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Media } from "../types";
 
 export type MediaDataType = {
   title: string;
@@ -8,14 +8,10 @@ export type MediaDataType = {
 };
 
 export interface HomeState {
-  contentType: "all" | "show" | "movie" | "favorite";
-  mainMedia?: Media;
-  mediaData?: MediaDataType[];
+  carouselData?: MediaDataType[];
 }
 
-const initialState: HomeState = {
-  contentType: "all",
-};
+const initialState: HomeState = {};
 
 export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
   name: "Home",

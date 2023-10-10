@@ -1,5 +1,5 @@
-import { SecondaryButton } from "@/components/button";
 import PlayIcon from "@/shared/assets/play.svg";
+import button from "@/shared/styles/button";
 
 interface AddListButtonProps {
   className?: string;
@@ -7,10 +7,10 @@ interface AddListButtonProps {
 
 const AddListButton = (props: AddListButtonProps) => {
   return (
-    <SecondaryButton className={props.className}>
+    <button className={button({ variant: "secondary" })}>
       <PlayIcon />
       Add List
-    </SecondaryButton>
+    </button>
   );
 };
 

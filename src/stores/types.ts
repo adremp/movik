@@ -1,26 +1,12 @@
+import { RouteType } from "@/shared/const/routes";
 import { HomeState } from "./home";
 import { MediaDetailsState } from "./mediaDetails";
+import { RootState } from "./root";
 
 export interface AppState {
   home: HomeState;
   mediaDetails: MediaDetailsState;
+  root: RootState;
 }
 
-interface MediaBase {
-  id: number;
-  poster_path?: string;
-  backdrop_path?: string;
-  title: string;
-  overview: string;
-  release_date: string;
-}
 
-export type MediaExtraParams = {
-  movie: {};
-  show: { chapters: number };
-};
-
-export type Media = {
-  [Key in keyof MediaExtraParams]: { type: Key } & MediaBase &
-    MediaExtraParams[Key];
-}[keyof MediaExtraParams];

@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html {
-	font-size: max(10px, 1vw);
-}
-
-body {
-	background-color: grey;
-	@apply h-screen overflow-hidden flex flex-col
+@layer utilities {
+	.p-page {
+		@apply px-20 pt-20 md:px-40 lg:pt-40 lg:px-80
+	}
 }

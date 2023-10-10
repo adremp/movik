@@ -1,7 +1,7 @@
-import { MediaVideo } from "@/shared/api/types";
-import createActions from "@/shared/helpers/createActions";
+import { Media } from "@/shared/api/types";
+import { MediaVideo } from "@/shared/api/types/mediaVideos";
+import createActions from "@/shared/utils/createActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Media } from "../types";
 
 export interface MediaDetailsState {
   media?: Media;
