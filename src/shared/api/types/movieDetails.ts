@@ -1,23 +1,23 @@
 export interface MovieDetails {
-  adult: boolean;
+  adult: boolean; // +
   backdrop_path: string;
   belongs_to_collection: BelongsToCollection;
   budget: number;
-  genres: Genre[];
-  homepage: string;
+  genres: Genre[]; // +
+  homepage: string; // +
   id: number;
   imdb_id: string;
-  original_language: string;
+  original_language: string; // +
   original_title: string;
   overview: string;
   popularity: number;
   poster_path: string;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
-  release_date: string;
+  release_date: string; // +
   revenue: number;
   runtime: number;
-  spoken_languages: SpokenLanguage[];
+  spoken_languages: SpokenLanguage[]; // +
   status: string;
   tagline: string;
   title: string;

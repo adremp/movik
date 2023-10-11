@@ -55,5 +55,5 @@ export function* fetchMainMedia({ payload }: PayloadAction<string>) {
 }
 
 export function* mediaDetailsVatcher() {
-  yield takeEvery(MediaDetailsActions.fetchVideos.type, fetchMainMedia);
+  // yield takeEvery(MediaDetailsActions.set.type, fetchMainMedia);
 }

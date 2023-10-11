@@ -4,6 +4,7 @@ import { MediaVideo } from "./mediaVideos";
 
 interface MediaBase {
   id: number;
+	adult?: boolean
   poster_path?: string;
   backdrop_path?: string;
   title: string;

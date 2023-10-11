@@ -23,7 +23,7 @@ export const fetchMedia = <R extends Record<string, any>>(
 ): Promise<R> => {
   const queryParams = new URLSearchParams(query);
   return fetch(`${urls.TMDB}${endpoint}?${queryParams}`, {
-    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_TOKEN}` },
+    headers: { Authorization: `Bearer ${process.env.TMDB_TOKEN}` },
     next: { revalidate: 600 },
   }).then((res) => res.json());
 };

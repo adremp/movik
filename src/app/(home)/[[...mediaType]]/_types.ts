@@ -1,6 +1,6 @@
 import { RouteType } from "@/shared/const/routes";
 
-export type Params = { params: { type?: string[] } };
+export type Params = { params: { mediaType?: string[] } };
 export type SearchParams = {
   searchParams: {
     mediaId?: string;

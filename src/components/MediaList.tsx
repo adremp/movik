@@ -1,32 +1,29 @@
-import PlayBgIcon from "@/shared/assets/play_bg.svg";
-import effect from "@/shared/styles/effect";
 import text from "@/shared/styles/text";
 import { cx } from "class-variance-authority";
-import Image from "next/image";
-import Link from "next/link";
+import { PropsWithChildren } from "react";
 import AppSwiper from "./Swiper";
-import { Media } from "@/shared/api/types";
 
-interface MediaListProps {
+interface MediaListProps extends PropsWithChildren {
   className?: string;
   title: string;
-  items: Media[];
 }
 
 const MediaList = (props: MediaListProps) => {
   return (
     <div className={cx("text-text-primary", props.className)}>
-      <h1 className={text({ size: "16" }, "ml-13")}>{props.title}</h1>
+      <h1 className={text({ size: "16" }, "ml-13 ml-93")}>{props.title}</h1>
       <AppSwiper
-        breakpointSlides={{ xs: 1, md: 3, lg: 7 }}
+        breakpointSlides={{ xs: 3, md: 4, lg: 7 }}
         className="mt-15"
         containerProps={{
           direction: "horizontal",
           "space-between": 30,
+          "slides-offset-before": 80,
         }}
         sliderProps={{ lazy: true }}
       >
-        {props.items.map((el) => (
+        {props.children}
+        {/* {props.items.map((el) => (
           <Link
             key={el.id}
             href={el.href}
@@ -53,7 +50,7 @@ const MediaList = (props: MediaListProps) => {
               {el.title}
             </h2>
           </Link>
-        ))}
+        ))} */}
       </AppSwiper>
     </div>
   );

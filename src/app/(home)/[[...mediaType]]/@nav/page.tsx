@@ -1,11 +1,9 @@
+import * as motion from "@/components/motion/components";
 import routes from "@/shared/const/routes";
 import action from "@/shared/styles/action";
 import text from "@/shared/styles/text";
 import Link from "next/link";
-
-export const generateStaticParams = () =>
-  ["shows", "movies"].map((el) => ({ type: [el] }));
-export const dynamicParams = true;
+import { Params } from "../_types";
 
 // [title, href]
 type ItemType = [string, string];
@@ -16,18 +14,23 @@ const items: ItemType[] = [
   ["favorite", routes.favorites()],
 ];
 
-export interface HomePageProps {
-  searchParams: {
-    movieId?: string;
-  };
-  params: { type?: string[] };
-}
-
-const Type = (props: HomePageProps) => {
-  const mediaType = props.params.type?.[0] ?? "";
+const Nav = (props: Params) => {
+  const mediaType = props.params.mediaType?.[0] ?? "";
 
   return (
-    <div className={"inline-flex text-text-primary gap-23"}>
+    <motion.div
+      initial={false}
+      transition={{ bounce: 0.1 }}
+      variants={{
+        expanded: { fontSize: "20px" },
+        default: { fontSize: "40px" },
+      }}
+      // variants={{
+      //   expanded: { scale: 0.5, originX: 0, originY: 0 },
+      //   default: { scale: 1 },
+      // }}
+      className={"inline-flex text-text-primary gap-23"}
+    >
       {items.map(([title, href]) => {
         const isCurrent = "/" + mediaType === href;
         return (
@@ -35,7 +38,7 @@ const Type = (props: HomePageProps) => {
             className={text(
               { size: "40" },
               action({ button: "opacity" }),
-              "opacity-30 whitespace-nowrap",
+              "opacity-30 text-[inherit] whitespace-nowrap",
               isCurrent && "opacity-100"
             )}
             href={href}
@@ -45,8 +48,8 @@ const Type = (props: HomePageProps) => {
           </Link>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
 
-export default Type;
+export default Nav;

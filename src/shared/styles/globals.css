@@ -2,8 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply bg-black
+}
+
 @layer utilities {
 	.p-page {
 		@apply px-20 pt-20 md:px-40 lg:pt-40 lg:px-80
 	}
+	.w-page {
+		@apply w-[calc(40px+100%)] ml-[-20px] md:ml-[-40px] lg:ml-[-80px] md:w-[calc(80px+100%)] lg:w-[calc(160px+100%)]
+	}
+}
+
+.scrollbar {
+	scrollbar-gutter: stable;
+	@apply pr-10
+}
+.scrollbar::-webkit-scrollbar {
+	width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+	@apply rounded-12 bg-primary/30 hover:bg-primary transition
 }

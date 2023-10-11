@@ -1,17 +1,12 @@
-import { Media } from "@/shared/api/types";
 import createActions from "@/shared/utils/createActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export type MediaDataType = {
-  title: string;
-  data: Media[];
-};
-
 export interface HomeState {
-  carouselData?: MediaDataType[];
+  mediaExpanded: boolean;
+  mediaScrollTop: number;
 }
 
-const initialState: HomeState = {};
+const initialState: HomeState = { mediaExpanded: false, mediaScrollTop: 0 };
 
 export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
   name: "Home",

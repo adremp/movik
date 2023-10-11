@@ -7,7 +7,7 @@ const style = cva(
   [
     text({ size: "18-700" }),
     action({ button: "opacity" }),
-    "inline-flex items-center user-select border-[0.75px] gap-4 py-6 px-8 rounded-4",
+    "inline-flex items-center h-min user-select border-[0.75px] gap-4 py-6 px-8 rounded-4",
   ],
   {
     variants: {

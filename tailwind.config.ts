@@ -1,6 +1,6 @@
 import { screens } from "./config/index";
 /** @type {import('tailwindcss').Config} */
-import plugin from "tailwindcss/plugin.js";
+import plugin from "tailwindcss/plugin";
 
 const toObj = (els: Array<string | number>, suffix = "") =>
   els.reduce((acc, el) => ({ ...acc, [el]: el + suffix }), {});
@@ -37,10 +37,15 @@ module.exports = {
       "px"
     ),
   },
-  plugin: [
-    plugin(({ addUtilities, addVariant }) => {
+  plugins: [
+    plugin(({ addUtilities, addVariant, matchUtilities }) => {
 			addVariant("child", "& > *");
 			addVariant("hovered", "&:hover");
+			matchUtilities({
+				"ga": (value: string) => ({
+					gridArea: value
+				})
+			})
       addUtilities({
         ".font-public-sans": {
           fontFamily: `var(--font-public-sans)`,

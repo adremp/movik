@@ -1,31 +1,27 @@
 import { rootSaga } from "@/sagas";
 import {
-	CombinedState,
-	DeepPartial,
-	PayloadAction,
-	Reducer,
-	combineReducers,
-	configureStore,
+  CombinedState,
+  DeepPartial,
+  Reducer,
+  combineReducers,
+  configureStore,
 } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { HomeReducer } from "./home";
 import { MediaDetailsReducer } from "./mediaDetails";
-import { AppState } from "./types";
 import { RootReducer } from "./root";
+import { AppState } from "./types";
 
 type CreateStoreParams = {
   initialState?: DeepPartial<AppState>;
 };
 
-
-
 export const createStore = (params?: CreateStoreParams) => {
-
   const reducer: Reducer<CombinedState<AppState>> = combineReducers({
     home: HomeReducer,
     mediaDetails: MediaDetailsReducer,
-		root: RootReducer
+    root: RootReducer,
   });
 
   const sagaMiddleware = createSagaMiddleware();
@@ -38,7 +34,7 @@ export const createStore = (params?: CreateStoreParams) => {
 
   sagaMiddleware.run(rootSaga);
 
-	return store
+  return store;
 };
 
 export default createStore();

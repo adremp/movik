@@ -5,7 +5,7 @@ const style = cva("", {
   variants: {
     button: {
       opacity: [
-        "opacity-90 hover:shadow-2xl transition-opacity hover:opacity-95 active:opacity-100",
+        "opacity-90 transition-opacity hover:opacity-95 active:opacity-100",
       ],
     },
   },

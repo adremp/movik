@@ -1,10 +1,7 @@
-import { Media } from "@/shared/api/types";
 import createActions from "@/shared/utils/createActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export interface RootState {
-  currentMedia?: Media;
-}
+export interface RootState {}
 
 const initialState: RootState = {};
 
