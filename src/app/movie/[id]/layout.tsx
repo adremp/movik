@@ -4,7 +4,6 @@ import { Params } from "./_types";
 interface Props extends Params {
   description: ReactElement;
   videos: ReactElement;
-	children: ReactElement;
 }
 
 const MoviesLayout = (props: Props) => {

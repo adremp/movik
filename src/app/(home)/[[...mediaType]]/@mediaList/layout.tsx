@@ -5,6 +5,7 @@ import { NavRouteKeys, Params } from "../_types";
 import ScrollWrapper from "./ScrollWrapper";
 
 export const typeFetchFn: Record<string, () => Promise<MediaDataList[]>> = {
+	index: getMovies,
   movies: getMovies,
   shows: getShows,
 } satisfies Record<NavRouteKeys, () => Promise<MediaDataList[]>>;

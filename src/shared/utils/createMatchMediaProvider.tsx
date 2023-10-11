@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   PropsWithChildren,
@@ -11,15 +11,17 @@ import {
 export default (media: string) => {
   const Context = createContext(false);
 
-  const mediaQuery = window.matchMedia(media);
-  const get = () => mediaQuery.matches;
+  const get = () => window.matchMedia(media).matches;
+  // const mediaQuery = window.matchMedia(media);
+  // const get = () => mediaQuery.matches;
   const subscribe = (cb: () => void) => {
-    mediaQuery.addEventListener("change", cb);
-    return () => mediaQuery.removeEventListener("change", cb);
+		const match = window.matchMedia(media)
+    match.addEventListener("change", cb);
+    return () => match.removeEventListener("change", cb);
   };
 
   const Provider = (props: PropsWithChildren) => {
-    const match = useSyncExternalStore(subscribe, get);
+    const match = useSyncExternalStore(subscribe, get, () => true);
 
     return <Context.Provider value={match}>{props.children}</Context.Provider>;
   };

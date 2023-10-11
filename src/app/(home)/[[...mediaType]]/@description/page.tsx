@@ -8,11 +8,11 @@ import PlayIcon from "@/shared/assets/play.svg";
 import button from "@/shared/styles/button";
 import pill from "@/shared/styles/pill";
 import text from "@/shared/styles/text";
-import Image from "next/image";
 import { getType, typeFetchFn } from "../@mediaList/layout";
 import { NavRouteKeys, Params, SearchParams } from "../_types";
 
 const nullMediaIdFetchFn: Record<string, (id: string) => Promise<Media>> = {
+  index: getMovieDetailsById,
   movies: getMovieDetailsById,
   shows: getShowDetailsById,
 } satisfies Record<NavRouteKeys, (id: string) => Promise<Media>>;

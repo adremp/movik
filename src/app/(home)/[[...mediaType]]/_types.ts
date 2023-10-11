@@ -7,4 +7,4 @@ export type SearchParams = {
   };
 };
 
-export type NavRouteKeys = keyof Pick<RouteType, "shows" | "movies">;
+export type NavRouteKeys = keyof Pick<RouteType, "shows" | "movies" | "index">;

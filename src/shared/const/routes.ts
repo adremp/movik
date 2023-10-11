@@ -1,5 +1,5 @@
 const routes = {
-  home: () => "/",
+  index: () => "/",
   movies: () => "/movies",
   shows: () => "/shows",
   show: (id: number | string = ":id") => `/show/${id}`,

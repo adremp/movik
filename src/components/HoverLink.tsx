@@ -10,19 +10,19 @@ interface HoverLinkProps extends ComponentProps<typeof Link> {
   preload?: boolean;
 }
 
-const HoverLink = (props: HoverLinkProps) => {
+const HoverLink = ({preload, delayMs, hoverHref, ...props}: HoverLinkProps) => {
   const router = useRouter();
 
   const timerRef = useRef<NodeJS.Timeout>();
 
   const onEnter = () => {
-    if (props.preload) {
-      router.prefetch(props.hoverHref);
+    if (preload) {
+      router.prefetch(hoverHref);
     }
     timerRef.current = setTimeout(() => {
-      router.push(props.hoverHref);
+      router.push(hoverHref);
       timerRef.current = undefined;
-    }, props.delayMs);
+    }, delayMs);
   };
 
   const onLeave = () => {
@@ -36,7 +36,7 @@ const HoverLink = (props: HoverLinkProps) => {
     <Link
       {...props}
       onPointerLeave={onLeave}
-      // onPointerCancel={onLeave}
+      onPointerCancel={onLeave}
       onPointerEnter={onEnter}
     ></Link>
   );
