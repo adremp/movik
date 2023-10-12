@@ -9,7 +9,7 @@ const style = cva("", {
       ],
     },
 		link: {
-			primary: ['hovered:hover:underline transition decoration-text-primary']
+			primary: ['hovered:hover:underline transition']
 		}
   },
 });

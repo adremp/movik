@@ -1,4 +1,5 @@
 import { RouteType } from "@/shared/const/routes";
+import { MovieVideo } from "./movieVideos";
 
 type MediaType = keyof Pick<RouteType, "movie" | "show">;
 
@@ -8,17 +9,14 @@ export interface MediaBase {
   type: MediaType;
   href: string;
 }
-// export interface Media {
-//   id: number;
-//   adult?: boolean;
-//   poster_path?: string;
-//   backdrop_path?: string;
-//   title: string;
-//   overview: string;
-//   release_date: string;
-//   type: MediaType;
-//   href: string;
-// }
+
+export interface Media extends MediaBase {
+  id: number;
+  adult?: boolean;
+  title: string;
+  overview: string;
+  release_date: string;
+}
 
 // type MediaExtraParams = {
 //   movie: {};
@@ -32,5 +30,5 @@ export interface MediaBase {
 
 export type MediaResponse = { results: any[] };
 
-export type VideoBase = { url: string };
-// export type Video = MovieVideo & VideoBase;
+type VideoBase = { url: string };
+export type Video = MovieVideo & VideoBase;

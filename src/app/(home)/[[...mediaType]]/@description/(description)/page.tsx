@@ -11,9 +11,8 @@ import text from "@/shared/styles/text";
 import dayjs from "dayjs";
 import { getType, typeFetchFn } from "../../@mediaList/(mediaList)/layout";
 import { NavRouteKeys, Params, SearchParams } from "../../_types";
-import { MovieDetails } from "@/shared/api/types/movieDetails";
 
-const nullMediaIdFetchFn = {
+const nullMediaIdFetchFn: Record<string, (id: string) => Promise<Media>> = {
   index: getMovieDetailsById,
   movies: getMovieDetailsById,
   shows: getShowDetailsById,
@@ -70,7 +69,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           {media.title}
         </motion.h1>
         <motion.div
-					initial={false}
+          initial={false}
           variants={{ expanded: { marginTop: 10 }, default: { marginTop: 35 } }}
           className={"flex items-center gap-14 ga-[i]"}
         >

@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${publicSans.className} h-screen overflow-hidden`}
+        className={`${publicSans.variable} ${staatliches.variable} font-public-sans h-screen overflow-hidden`}
       >
         <AppProviders>{children}</AppProviders>
       </body>

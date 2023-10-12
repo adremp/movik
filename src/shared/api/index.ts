@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { urls } from "../const";
 import {
   MediaParam,
@@ -6,8 +7,14 @@ import {
   moviesParams,
   showsParams,
 } from "./const";
-import { mapMovie, movieTypeMaps, showTypeMaps } from "./maps";
-import { Media, MediaResponse, } from "./types";
+import {
+  mapMovieDetails,
+  mapShowDetails,
+  mapVideo,
+  movieTypeMaps,
+  showTypeMaps,
+} from "./maps";
+import { Media, MediaResponse, Video } from "./types";
 import { MovieCast, MovieCredentialsResponse } from "./types/movieCredentials";
 import { MovieDetails } from "./types/movieDetails";
 import { MovieVideosResponse } from "./types/movieVideos";
@@ -23,7 +30,11 @@ export const fetchMedia = <R extends Record<string, any>>(
   return fetch(`${urls.TMDB}${endpoint}?${queryParams}`, {
     headers: { Authorization: `Bearer ${process.env.TMDB_TOKEN}` },
     next: { revalidate: 600 },
-  }).then((res) => res.json());
+  }).then(async (res) => {
+    const ret = await res.json();
+    if (ret.success === false) notFound();
+    return ret;
+  });
 };
 
 export type MediaDataList = Pick<
@@ -37,10 +48,11 @@ export const getMovies = async (): Promise<MediaDataList[]> => {
   const movies = await Promise.all(
     moviesParams.map((p) =>
       fetchMedia<MediaResponse>(p.url, p.query).then((data) =>
-        data.results.map(movieTypeMaps[p.type])
+        data?.results.map(movieTypeMaps[p.type])
       )
     )
   );
+
   return movies.map((el, i) => ({
     data: el,
     title: moviesParams[i].title,
@@ -64,21 +76,28 @@ export const getShows = async (): Promise<MediaDataList[]> => {
 };
 
 export const getMovieDetailsById = (id: number | string) =>
-  fetchMedia<MovieDetails>(`/movie/${id}`, {}).then(mapMovie);
+  fetchMedia<MovieDetails>(`/movie/${id}`, {}).then((data) =>
+    mapMovieDetails(data)
+  );
 
 export const getMovieVieosById = (id: string): Promise<Video[]> =>
   fetchMedia<MovieVideosResponse>(`/movie/${id}/videos`, {}).then((data) =>
-    data.results.map((el) => ({ ...el, url: urls.youtubeVideo(el.key) }))
+    data.results.map(mapVideo)
   );
 
-export const getShowDetailsById = (
-  id: number | string
-): Promise<ShowDetails & Media> => fetchMedia<ShowDetails>(`/tv/${id}`, {});
+export const getShowDetailsById = (id: number | string) =>
+  fetchMedia<ShowDetails>(`/tv/${id}`, {}).then(mapShowDetails);
 
 export const getShowVideosById = (id: number | string): Promise<Video[]> =>
   fetchMedia<ShowVideosResponse>(`/tv/${id}/videos`, {}).then((data) =>
-    data.results.map((el) => ({ ...el, url: urls.youtubeVideo(el.key) }))
+    data.results.map(mapVideo)
   );
+
+export const getShowSeasonVideos = (showId: string, season: string) =>
+  fetchMedia<ShowVideosResponse>(
+    `/tv/${showId}/season/${season}/videos`,
+    {}
+  ).then((data) => data.results.map(mapVideo));
 
 export const getMovieCredits = (id: number | string): Promise<MovieCast[]> =>
   fetchMedia<MovieCredentialsResponse>(`/movie/${id}/credits`, {}).then(

@@ -1,12 +1,11 @@
 import MediaVideos from "@/components/MediaVideos";
 import { getMovieVieosById } from "@/shared/api";
-import { Params } from "../../_types";
+import { Params, SearchParams } from "../../_types";
 
-const Videos = async (props: Params) => {
+const Videos = async (props: Params & SearchParams) => {
   const videos = await getMovieVieosById(props.params.id);
-  const videoUrls = videos.map((v) => v.url);
 
-  return <MediaVideos urls={videoUrls} />;
+  return <MediaVideos videos={videos} />;
 };
 
 export default Videos;

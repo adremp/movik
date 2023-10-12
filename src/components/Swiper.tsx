@@ -3,10 +3,12 @@
 import { useBreakpoint } from "@/providers/breakpoint";
 import getMatchBreakpoint from "@/shared/utils/getMatchBreakpoint";
 import { cx } from "class-variance-authority";
-import { Children, IframeHTMLAttributes, ReactNode, RefObject } from "react";
+import { Children, ReactNode, RefObject } from "react";
 import { Swiper } from "swiper";
+import SwiperCore from "swiper/core";
 import "swiper/css";
 import { register } from "swiper/element";
+import { Mousewheel, Virtual, HashNavigation } from "swiper/modules";
 import { SwiperSlideProps } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import { ConfigScreens } from "../../config";
@@ -53,12 +55,15 @@ declare global {
   }
 }
 
+SwiperCore.use([Mousewheel, Virtual, HashNavigation]);
+
 interface ISwiperProps {
   className?: string;
   breakpointSlides?: Partial<Record<keyof ConfigScreens, number>>;
   children: ReactNode;
   containerProps: Omit<SwiperContainerAttributes, "modules">;
   sliderProps: SwiperSlideAttributes;
+  sliderPropsList?: Record<string, string>[];
 }
 
 const AppSwiper = (props: ISwiperProps) => {
@@ -73,24 +78,15 @@ const AppSwiper = (props: ISwiperProps) => {
       <swiper-container
         slides-per-view={breakpointSlides}
         {...props.containerProps}
-        // modules={[EffectCoverflow]}
-        // effect={"coverflow"}
       >
-        {Children.map(props.children, (el) => (
-          <swiper-slide {...props.sliderProps}>{el}</swiper-slide>
+        {Children.map(props.children, (el, i) => (
+          <swiper-slide {...props.sliderProps} {...props.sliderPropsList?.[i]}>
+            {el}
+          </swiper-slide>
         ))}
       </swiper-container>
     </div>
   );
 };
-
-export const SwiperIFrame = (
-  props: IframeHTMLAttributes<HTMLIFrameElement>
-) => (
-  <iframe
-    {...props}
-    className={cx("hovered:pointer-events-none", props.className)}
-  ></iframe>
-);
 
 export default AppSwiper;

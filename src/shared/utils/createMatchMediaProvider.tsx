@@ -12,8 +12,6 @@ export default (media: string) => {
   const Context = createContext(false);
 
   const get = () => window.matchMedia(media).matches;
-  // const mediaQuery = window.matchMedia(media);
-  // const get = () => mediaQuery.matches;
   const subscribe = (cb: () => void) => {
 		const match = window.matchMedia(media)
     match.addEventListener("change", cb);
@@ -28,9 +26,9 @@ export default (media: string) => {
 
   const useMedia = () => useContext(Context);
 
-  const When = (props: { true: ReactNode; false: ReactNode }) => {
+  const When = (props: { true: ReactNode; false: ReactNode }): JSX.Element => {
     const match = useMedia();
-    return match ? props.true : props.false;
+    return <>{match ? props.true : props.false}</>;
   };
 
   return [Provider, useMedia, When] as const;

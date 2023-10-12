@@ -31,7 +31,7 @@ const MediaBackgroundImage = (props: MediaBackgroundImageProps) => {
 				priority
         fill
       /> */}
-      <span className={effect({ bg: "darkOverlayLeft" })}></span>
+      <span className={effect({ bg: "darkOverlayLeft", cover: "fullAbsolute" })}></span>
     </motion.div>
   );
 };

@@ -8,5 +8,6 @@ export type SearchParams = {
 	searchParams: {
 		video?: boolean,
 		trailer?: boolean
+		season?: string
 	}
 }

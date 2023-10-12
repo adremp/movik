@@ -12,10 +12,10 @@ interface MediaDescriptionProps {
 }
 const MediaDescription = (props: MediaDescriptionProps) => {
   return (
-    <motion.div
+    <motion.div	
       variants={{ expanded: {maxWidth: "auto"}, default: { maxWidth: "65ch" } }}
       className={cx(
-        "z-[1] text-text-primary",
+        "z-[1]",
         props.className
       )}
     >

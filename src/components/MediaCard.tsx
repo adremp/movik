@@ -3,6 +3,8 @@ import effect from "@/shared/styles/effect";
 import text from "@/shared/styles/text";
 import Image from "next/image";
 import HoverLink from "./HoverLink";
+import { WhenMediaHover } from "@/providers";
+import Link from "next/link";
 
 interface MediaCardProps {
   className?: string;
@@ -14,7 +16,7 @@ interface MediaCardProps {
 
 const MediaCard = (props: MediaCardProps) => {
   const className = effect(
-    { bg: "darkOverlay" },
+    { bg: "darkOverlay", cover: "fullAbsolute" },
     "rounded-19 flex overflow-hidden items-center justify-center w-full group aspect-[2/3] relative",
     "[&:not(:hover)]:after:opacity-0 after:transition-opacity"
   );
@@ -53,7 +55,7 @@ const MediaCard = (props: MediaCardProps) => {
     //   true={
     //     <HoverLink
     //       delayMs={2000}
-    // 			preload
+    //       preload
     //       className={className}
     //       hoverHref={props.hoverHref}
     //       href={props.href}

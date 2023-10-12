@@ -41,7 +41,7 @@ module.exports = {
   plugins: [
     plugin(({ addUtilities, addVariant, matchUtilities }) => {
       addVariant("child", "& > *");
-      addVariant("hovered", "&:hover");
+      addVariant("hovered", "@media(hover:hover)");
       matchUtilities({
         ga: (value: string) => ({
           gridArea: value,

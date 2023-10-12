@@ -2,6 +2,7 @@ import MediaBackgroundImage from "@/components/MediaBackgroundImage";
 import MediaDescription from "@/components/MediaDescription";
 import * as motion from "@/components/motion/components";
 import { getMovieDetailsById } from "@/shared/api";
+import RateIcon from "@/shared/assets/star.svg";
 import pill from "@/shared/styles/pill";
 import text from "@/shared/styles/text";
 import dayjs from "dayjs";
@@ -31,24 +32,32 @@ const Description = async (props: Params) => {
   );
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.div
+      className="flex flex-col"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       {bgImage && <MediaBackgroundImage src={bgImage} />}
       <MediaDescription
+        className="max-w-[65ch]"
         infoChild={infoChild}
         title={movie.title}
         description={movie.overview}
         bottomChild={bottomChild}
       />
-      <div className="mt-auto flex justify-between w-full">
+      <div className="mt-auto flex justify-between">
         <div>
           <p className={text({ size: "50-400" })}>movie</p>
           <p className={text({ size: "22-400" }, "opacity-20 mt-2")}>
-            {movie.genres.join(" / ")}
+            {movie.genres.map((el) => el.name).join(" / ")}
           </p>
         </div>
         <div>
-          <p className={text({ size: "50-400" })}>{movie.vote_average}</p>
-					<p className={text({size: "22-400"}, "opacity-20")}>rate</p>
+          <p className={text({ size: "50-400" }, "flex items-center gap-7")}>
+            {movie.vote_average.toFixed(1)}
+            <RateIcon />
+          </p>
+          <p className={text({ size: "22-400" }, "opacity-20 mt-2")}>rate</p>
         </div>
       </div>
     </motion.div>
