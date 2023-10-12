@@ -8,6 +8,9 @@ const style = cva("", {
         "opacity-90 transition-opacity hover:opacity-95 active:opacity-100",
       ],
     },
+		link: {
+			primary: ['hovered:hover:underline transition decoration-text-primary']
+		}
   },
 });
 

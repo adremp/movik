@@ -20,7 +20,7 @@ const HoverLink = ({preload, delayMs, hoverHref, ...props}: HoverLinkProps) => {
       router.prefetch(hoverHref);
     }
     timerRef.current = setTimeout(() => {
-      router.push(hoverHref);
+      router.replace(hoverHref);
       timerRef.current = undefined;
     }, delayMs);
   };

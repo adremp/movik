@@ -41,7 +41,7 @@ const MediaCard = (props: MediaCardProps) => {
 
   return (
     <HoverLink
-      delayMs={300}
+      delayMs={0}
       preload
       className={className}
       hoverHref={props.hoverHref}

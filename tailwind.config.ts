@@ -23,10 +23,11 @@ module.exports = {
     },
     fontWeight: toObj(["400", "500", "600", "700"]),
     colors: {
-			black: "black",
+      black: "black",
       "text-primary": "white",
       primary: "#FFE24B",
       "primary-inverted": "#000000",
+      "pill-primary": "rgba(255, 255, 255, 0.31);",
     },
     spacing: toObj(
       Array.from({ length: 300 }, (_, i) => i),
@@ -39,13 +40,13 @@ module.exports = {
   },
   plugins: [
     plugin(({ addUtilities, addVariant, matchUtilities }) => {
-			addVariant("child", "& > *");
-			addVariant("hovered", "&:hover");
-			matchUtilities({
-				"ga": (value: string) => ({
-					gridArea: value
-				})
-			})
+      addVariant("child", "& > *");
+      addVariant("hovered", "&:hover");
+      matchUtilities({
+        ga: (value: string) => ({
+          gridArea: value,
+        }),
+      });
       addUtilities({
         ".font-public-sans": {
           fontFamily: `var(--font-public-sans)`,

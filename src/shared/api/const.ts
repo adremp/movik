@@ -19,6 +19,7 @@ export const moviesParams: MediaParam<MoviesParamTypes>[] = [
       sort_by: "popularity.desc",
       "release_date.gte": dayjs().subtract(1, "month").format("YYYY-MM-DD"),
       page: "1",
+      include_adult: "true",
     },
   },
   {
@@ -29,6 +30,7 @@ export const moviesParams: MediaParam<MoviesParamTypes>[] = [
       sort_by: "popularity.desc",
       "release_date.gte": dayjs().subtract(1, "year").format("YYYY-MM-DD"),
       page: "1",
+      include_adult: "true",
     },
   },
 ];

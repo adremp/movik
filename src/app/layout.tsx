@@ -4,20 +4,18 @@ import type { Metadata } from "next";
 import { Public_Sans, Staatliches } from "next/font/google";
 import { PropsWithChildren } from "react";
 
-const staatliches = Staatliches({
+export const staatliches = Staatliches({
   subsets: ["latin"],
   style: ["normal"],
   weight: ["400"],
   variable: "--font-staatliches",
-  preload: true,
 });
 
-const publicSans = Public_Sans({
+export const publicSans = Public_Sans({
   weight: ["400", "500", "600", "700"],
   style: ["normal"],
   subsets: ["latin"],
   variable: "--font-public-sans",
-  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -29,7 +27,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${publicSans.className} ${staatliches.className} h-screen overflow-hidden`}
+        className={`${publicSans.className} h-screen overflow-hidden`}
       >
         <AppProviders>{children}</AppProviders>
       </body>

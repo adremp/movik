@@ -8,10 +8,12 @@ import PlayIcon from "@/shared/assets/play.svg";
 import button from "@/shared/styles/button";
 import pill from "@/shared/styles/pill";
 import text from "@/shared/styles/text";
-import { getType, typeFetchFn } from "../@mediaList/layout";
-import { NavRouteKeys, Params, SearchParams } from "../_types";
+import dayjs from "dayjs";
+import { getType, typeFetchFn } from "../../@mediaList/(mediaList)/layout";
+import { NavRouteKeys, Params, SearchParams } from "../../_types";
+import { MovieDetails } from "@/shared/api/types/movieDetails";
 
-const nullMediaIdFetchFn: Record<string, (id: string) => Promise<Media>> = {
+const nullMediaIdFetchFn = {
   index: getMovieDetailsById,
   movies: getMovieDetailsById,
   shows: getShowDetailsById,
@@ -21,12 +23,12 @@ const DescriptionPage = async (props: SearchParams & Params) => {
   const id = props.searchParams.mediaId;
   const type = getType(props);
 
-  const movie = id
+  const media = id
     ? await nullMediaIdFetchFn[type](id)
     : (await typeFetchFn[type]())[0]["data"][0];
 
-  const bgImage = movie.backdrop_path || movie.poster_path;
-
+  const bgImage = media.backdrop_path || media.poster_path;
+  console.log("movie :>> ", media);
   return (
     <motion.div>
       {bgImage && <MediaBackgroundImage src={bgImage} />}
@@ -52,7 +54,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
         className={"z-[1] h-min overflow-hidden grid text-text-primary"}
       >
         <motion.h1
-          key={movie.id + "1"}
+          key={media.id + "1"}
           transition={{ fontSize: { duration: 0 } }}
           initial={false}
           variants={{
@@ -65,17 +67,22 @@ const DescriptionPage = async (props: SearchParams & Params) => {
             "overflow-hidden text-ellipsis break-words line-clamp-2 text-[inherit] ga-[t]"
           )}
         >
-          {movie.title}
+          {media.title}
         </motion.h1>
-        <div
-          className={text({ size: "20-400" }, "mt-35 ga-[i] tracking-[-0.1px]")}
+        <motion.div
+					initial={false}
+          variants={{ expanded: { marginTop: 10 }, default: { marginTop: 35 } }}
+          className={"flex items-center gap-14 ga-[i]"}
         >
-          {movie.adult && (
-            <span className={pill({ variant: "primary" })}></span>
+          {media.adult && (
+            <span className={pill({ variant: "primary" })}>C18</span>
           )}
-        </div>
+          <span className={text({ size: "20-400" })}>
+            {dayjs(media.release_date).format("YYYY")}
+          </span>
+        </motion.div>
         <motion.p
-          key={movie.id + "2"}
+          key={media.id + "2"}
           transition={{
             marginLeft: { duration: 0 },
             marginTop: { duration: 0 },
@@ -87,7 +94,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           }}
           className={text({ size: "20-400" }, "ga-[d] h-min line-clamp-5")}
         >
-          {movie.overview}
+          {media.overview}
         </motion.p>
         <motion.div
           transition={{ marginTop: { duration: 0 } }}
@@ -101,8 +108,8 @@ const DescriptionPage = async (props: SearchParams & Params) => {
         >
           <MediaLink
             extraUrl="?watch"
-            mediaId={movie.id}
-            type={movie.type}
+            mediaId={media.id}
+            type={media.type}
             className={button({ variant: "primary" }, "mr-auto")}
           >
             <PlayIcon />
@@ -110,8 +117,8 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           </MediaLink>
           <MediaLink
             extraUrl="?trailer"
-            mediaId={movie.id}
-            type={movie.type}
+            mediaId={media.id}
+            type={media.type}
             className={button({ variant: "secondary" }, "ml-auto")}
           >
             <PlayIcon />

@@ -1,11 +1,11 @@
 import MediaCard from "@/components/MediaCard";
 import MediaList from "@/components/MediaList";
 import { MediaDataList, getMovies, getShows } from "@/shared/api";
-import { NavRouteKeys, Params } from "../_types";
+import { NavRouteKeys, Params } from "../../_types";
 import ScrollWrapper from "./ScrollWrapper";
 
 export const typeFetchFn: Record<string, () => Promise<MediaDataList[]>> = {
-	index: getMovies,
+  index: getMovies,
   movies: getMovies,
   shows: getShows,
 } satisfies Record<NavRouteKeys, () => Promise<MediaDataList[]>>;

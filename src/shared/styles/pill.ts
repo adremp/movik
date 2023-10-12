@@ -7,7 +7,7 @@ const style = cva("inline-block", {
     variant: {
       primary: [
         text({ size: "18-500" }),
-        "px-7 rounded-4 py-3 bg-[rgba(255, 255, 255, 0.31)]",
+        "px-7 rounded-4 py-3 bg-pill-primary",
       ],
     },
   },

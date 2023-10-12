@@ -15,13 +15,12 @@ const MediaDescription = (props: MediaDescriptionProps) => {
     <motion.div
       variants={{ expanded: {maxWidth: "auto"}, default: { maxWidth: "65ch" } }}
       className={cx(
-        "z-[1] ga-[main] text-text-primary",
+        "z-[1] text-text-primary",
         props.className
       )}
-      // className={cx("max-w-[65ch] z-[1] text-text-primary", props.className)}
     >
-      <h1 className={text({ size: "100" })}>{props.title}</h1>
-      <div className={text({ size: "20-400" }, "mt-35 tracking-[-0.1px]")}>
+      <h1 className={text({ size: "100" }, props.title.length > 15 && "text-70")}>{props.title}</h1>
+      <div className={"mt-35 flex gap-14"}>
         {props.infoChild}
       </div>
       <p className={text({ size: "20-400" }, "mt-19")}>{props.description}</p>

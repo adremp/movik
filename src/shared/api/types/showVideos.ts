@@ -1,9 +1,9 @@
-export interface MediaVideoResponse {
+export interface ShowVideosResponse {
   id: number;
-  results: MediaVideo[];
+  results: ShowVideo[];
 }
 
-export interface MediaVideo {
+export interface ShowVideo {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;

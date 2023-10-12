@@ -1,15 +1,9 @@
-import { Media } from "@/shared/api/types";
-import { MediaVideo } from "@/shared/api/types/mediaVideos";
 import createActions from "@/shared/utils/createActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export interface MediaDetailsState {
+export interface MediaDetailsState {}
 
-}
-
-const initialState: MediaDetailsState = {
-
-};
+const initialState: MediaDetailsState = {};
 
 export const { actions: MediaDetailsActions, reducer: MediaDetailsReducer } =
   createSlice({

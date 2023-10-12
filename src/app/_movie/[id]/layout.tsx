@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, Suspense } from "react";
 import { Params } from "./_types";
 
 interface Props extends Params {

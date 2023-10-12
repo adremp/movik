@@ -19,7 +19,6 @@ const Layout = (props: LayoutProps) => {
     <AnimatePresence>
       <ScrollController>
         <motion.main className="flex p-page max-h-full flex-col">
-        {/* <motion.main className="flex p-page max-h-full flex-col"> */}
           {props.nav}
           {props.description}
           {props.mediaList}
