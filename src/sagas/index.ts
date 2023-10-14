@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
-import { mediaDetailsVatcher } from "./mediaDetails";
+import { homeVatcher } from "./home";
 
 export function* rootSaga() {
-  yield all([mediaDetailsVatcher()]);
+  yield all([homeVatcher()]);
 }

@@ -1,6 +1,6 @@
+
 import MediaBackgroundImage from "@/components/MediaBackgroundImage";
 import MediaDescription from "@/components/MediaDescription";
-import AppSwiper from "@/components/Swiper";
 import * as motion from "@/components/motion/components";
 import { getShowDetailsById, getShowSeasonVideos } from "@/shared/api";
 import { Season } from "@/shared/api/types/showDetails";

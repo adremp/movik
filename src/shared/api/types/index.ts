@@ -18,17 +18,12 @@ export interface Media extends MediaBase {
   release_date: string;
 }
 
-// type MediaExtraParams = {
-//   movie: {};
-//   show: { chapters: number };
-// };
 
-// export type Media = {
-//   [Key in keyof MediaExtraParams]: MediaBase &
-//     MediaExtraParams[Key];
-// }[keyof MediaExtraParams];
-
-export type MediaResponse = { results: any[] };
+export type MediaResponse<R = any[]> = {
+  results: R;
+  page: number;
+  total_pages: number;
+};
 
 type VideoBase = { url: string };
 export type Video = MovieVideo & VideoBase;

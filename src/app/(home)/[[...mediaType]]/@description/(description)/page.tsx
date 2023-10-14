@@ -27,9 +27,28 @@ const DescriptionPage = async (props: SearchParams & Params) => {
     : (await typeFetchFn[type]())[0]["data"][0];
 
   const bgImage = media.backdrop_path || media.poster_path;
-  console.log("movie :>> ", media);
+  // console.log("movie :>> ", media);
   return (
-    <motion.div>
+    <motion.div
+      initial={false}
+      variants={{
+        full: {
+          display: ["block", "none"],
+          maxHeight: 0,
+          overflow: "hidden",
+        },
+        default: {
+          display: "block",
+          maxHeight: "100%",
+          overflow: "visible",
+        },
+        expanded: {
+          display: "block",
+          maxHeight: "100%",
+          overflow: "visible",
+        },
+      }}
+    >
       {bgImage && <MediaBackgroundImage src={bgImage} />}
       <motion.div
         transition={{ bounce: 0.1, gridTemplate: { duration: 0 } }}
@@ -39,6 +58,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
             gridTemplate: `"t d" max-content "i d" 0fr "a d" 1fr / 1fr 1fr `,
             marginTop: 20,
             height: [null, "20vh", "20vh"],
+            display: "grid",
           },
           default: {
             gridTemplate: [
@@ -46,8 +66,14 @@ const DescriptionPage = async (props: SearchParams & Params) => {
               `"t ." "i ." "d ." "a ." 1fr / 2fr 1fr`,
               `"t ." "i ." "d ." "a ." 1fr / 2fr 1fr`,
             ],
-            height: [null, "60vh", "60vh"],
+            height: [null, "65vh", "65vh"],
             marginTop: 55,
+            display: "grid",
+          },
+          full: {
+            // overflow: "hidden",
+            display: [null, "grid", "none"],
+            height: [null, 0, 0],
           },
         }}
         className={"z-[1] h-min overflow-hidden grid text-text-primary"}
@@ -106,24 +132,15 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           className="flex basis-full gap-12 ga-[a]"
         >
           <MediaLink
-            extraUrl="?watch"
-            mediaId={media.id}
-            type={media.type}
-            className={button({ variant: "primary" }, "mr-auto")}
-          >
-            <PlayIcon />
-            Watch
-          </MediaLink>
-          <MediaLink
             extraUrl="?trailer"
             mediaId={media.id}
             type={media.type}
-            className={button({ variant: "secondary" }, "ml-auto")}
+            className={button({ variant: "primary" })}
           >
             <PlayIcon />
             Trailer
           </MediaLink>
-          <AddListButton />
+          {/* <AddListButton /> */}
         </motion.div>
       </motion.div>
     </motion.div>

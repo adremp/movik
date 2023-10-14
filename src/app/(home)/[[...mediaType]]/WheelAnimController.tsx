@@ -8,27 +8,31 @@ import { PropsWithChildren, useEffect } from "react";
 interface ScrollProps extends PropsWithChildren {}
 
 const ScrollController = (props: ScrollProps) => {
-  const expanded = useAppSelector((s) => s.home.mediaExpanded);
+  const animViewType = useAppSelector((s) => s.home.animViewType);
   const scrollTop = useAppSelector((s) => s.home.mediaScrollTop);
   const { set } = useHomeActions();
 
   useEffect(() => {
     const onScroll = (e: WheelEvent) => {
-      if (e.deltaY > 0 && !expanded) {
-        set({ mediaExpanded: true });
+      if (e.deltaY > 0 && animViewType === "default") {
+        set({ animViewType: "expanded" });
       } else if (e.deltaY < 0 && scrollTop === 0) {
-        set({ mediaExpanded: false });
+        set({
+          animViewType: "default",
+          fullViewParamType: undefined,
+          fullViewMediaResponse: { page: 0, results: [], total_pages: 0 },
+					fullViewErrorMessage: undefined,
+					mediaScrollTop: 0,
+					fullViewLoading: false
+        });
       }
     };
     window.addEventListener("wheel", onScroll);
     return () => window.removeEventListener("wheel", onScroll);
-  }, [expanded, scrollTop]);
+  }, [animViewType, scrollTop]);
 
   return (
-    <motion.div
-      className="w-full h-full"
-      animate={expanded ? "expanded" : "default"}
-    >
+    <motion.div className="w-full h-full" animate={animViewType}>
       {props.children}
     </motion.div>
   );

@@ -1,6 +1,12 @@
 import dayjs from "dayjs";
 import { urls } from "../const";
 
+export const getMediaParam = (type: string) => {
+  for (const param of mediaParams) {
+    if (param.type === type) return param;
+  }
+};
+
 export type MediaParam<Type extends string> = {
   type: Type;
   title: string;
@@ -51,3 +57,7 @@ export const showsParams: MediaParam<ShowsParamTypes>[] = [
     query: {},
   },
 ];
+
+export type ParamTypes = ShowsParamTypes | MoviesParamTypes;
+
+export const mediaParams = [...moviesParams, ...showsParams];

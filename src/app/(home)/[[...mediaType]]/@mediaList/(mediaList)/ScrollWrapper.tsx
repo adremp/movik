@@ -12,7 +12,7 @@ interface ScrollWrapperProps extends PropsWithChildren {}
 const ScrollWrapper = (props: ScrollWrapperProps) => {
   const { set } = useHomeActions();
   const scrollTop = useAppSelector((s) => s.home.mediaScrollTop);
-  const isExpanded = useAppSelector((s) => s.home.mediaExpanded);
+  const animViewType = useAppSelector((s) => s.home.animViewType);
 
   const ref = useOnMountEl<HTMLDivElement>({ scrollTop });
 
@@ -25,10 +25,14 @@ const ScrollWrapper = (props: ScrollWrapperProps) => {
       ref={ref}
       onScroll={onScroll}
       initial={false}
-      variants={{ expanded: { marginTop: 40 }, default: { marginTop: 85 } }}
+      variants={{
+        expanded: { marginTop: 40 },
+        full: { marginTop: 0 },
+        default: { marginTop: 85 },
+      }}
       className={cx(
-        "flex flex-col scrollbar w-page grow gap-15 mt-85",
-        isExpanded ? "overflow-y-auto" : "overflow-hidden"
+        "flex flex-col relative scrollbar w-page grow gap-15 mt-85",
+        animViewType !== "default" ? "overflow-y-auto" : "overflow-hidden"
       )}
     >
       {props.children}

@@ -2,26 +2,23 @@ import PlayBgIcon from "@/shared/assets/play_bg.svg";
 import effect from "@/shared/styles/effect";
 import text from "@/shared/styles/text";
 import Image from "next/image";
-import HoverLink from "./HoverLink";
-import { WhenMediaHover } from "@/providers";
-import Link from "next/link";
 
 interface MediaCardProps {
   className?: string;
   image: string;
   title: string;
-  href: string;
-  hoverHref: string;
 }
 
 const MediaCard = (props: MediaCardProps) => {
   const className = effect(
     { bg: "darkOverlay", cover: "fullAbsolute" },
     "rounded-19 flex overflow-hidden items-center justify-center w-full group aspect-[2/3] relative",
-    "[&:not(:hover)]:after:opacity-0 after:transition-opacity"
+    "[&:not(:hover)]:after:opacity-0 after:transition-opacity",
+    props.className
   );
-  const children = (
-    <>
+
+  return (
+    <div className={className}>
       <Image
         className="object-contain"
         fill
@@ -38,38 +35,7 @@ const MediaCard = (props: MediaCardProps) => {
       >
         {props.title}
       </h2>
-    </>
-  );
-
-  return (
-    <HoverLink
-      delayMs={0}
-      preload
-      className={className}
-      hoverHref={props.hoverHref}
-      href={props.href}
-    >
-      {children}
-    </HoverLink>
-    // <WhenMediaHover
-    //   true={
-    //     <HoverLink
-    //       delayMs={2000}
-    //       preload
-    //       className={className}
-    //       hoverHref={props.hoverHref}
-    //       href={props.href}
-    //     >
-    //       {children}
-    //     </HoverLink>
-    //   }
-    //   false={
-    //     <Link href={props.href} className={className}>
-    //       {children}
-    //     </Link>
-    //   }
-    // />
+    </div>
   );
 };
-
 export default MediaCard;

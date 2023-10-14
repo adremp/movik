@@ -22,8 +22,9 @@ const Nav = (props: Params) => {
       initial={false}
       transition={{ bounce: 0.1 }}
       variants={{
-        expanded: { fontSize: "25px" },
-        default: { fontSize: "40px" },
+        expanded: { fontSize: "25px", maxHeight: "100%", opacity: 1 },
+        full: { fontSize: "25px", maxHeight: "0%", opacity: 0 },
+        default: { fontSize: "40px", maxHeight: "100%", opacity: 1 },
       }}
       className={"inline-flex text-text-primary gap-23"}
     >

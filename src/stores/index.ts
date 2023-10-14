@@ -9,8 +9,6 @@ import {
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { HomeReducer } from "./home";
-import { MediaDetailsReducer } from "./mediaDetails";
-import { RootReducer } from "./root";
 import { AppState } from "./types";
 
 type CreateStoreParams = {
@@ -20,8 +18,6 @@ type CreateStoreParams = {
 export const createStore = (params?: CreateStoreParams) => {
   const reducer: Reducer<CombinedState<AppState>> = combineReducers({
     home: HomeReducer,
-    mediaDetails: MediaDetailsReducer,
-    root: RootReducer,
   });
 
   const sagaMiddleware = createSagaMiddleware();

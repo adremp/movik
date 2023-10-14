@@ -1,7 +1,8 @@
+import { MediaTypeParams } from "@/app/(mediaDetails)/[mediaType]/layout";
 import { urls } from "../const";
 import routes from "../const/routes";
 import getFullTMDBImgPath from "../utils/getFullTMDBImgPath";
-import { MoviesParamTypes, ShowsParamTypes } from "./const";
+import { MoviesParamTypes, ParamTypes, ShowsParamTypes } from "./const";
 import { Media } from "./types";
 import { AiringTodayShow } from "./types/airingTodayShows";
 import { MovieDetails } from "./types/movieDetails";
@@ -17,27 +18,18 @@ export const mapDiscoverMovie = <T extends MovieDiscover | MovieDetails>(
 ): Media => ({
   ...data,
   backdrop_path: getFullTMDBImgPath(data.backdrop_path),
-  poster_path: getFullTMDBImgPath(data.poster_path),
+  poster_path: getFullTMDBImgPath(data.poster_path, "w342"),
   type: "movie",
   href: routes.movie(data.id),
 });
 
-export const mapMovieDetails = <T extends MovieDetails>(
-  data: T
-): T & Media => ({
+export const mapMovieDetails = <T extends MovieDetails>(data: T): T & Media => ({
   ...data,
   backdrop_path: getFullTMDBImgPath(data.backdrop_path),
-  poster_path: getFullTMDBImgPath(data.poster_path),
+  poster_path: getFullTMDBImgPath(data.poster_path, "w342"),
   type: "movie",
   href: routes.movie(data.id),
 });
-// export const mapMovieDetails = (data: MovieDetails): Media => ({
-//   ...data,
-//   backdrop_path: getFullTMDBImgPath(data.backdrop_path),
-//   poster_path: getFullTMDBImgPath(data.poster_path),
-//   type: "movie",
-//   href: routes.movie(data.id),
-// });
 
 export const mapDiscoverShow = <
   T extends ShowDiscover | ShowDetails | AiringTodayShow | PopularLastWeekShow
@@ -46,7 +38,7 @@ export const mapDiscoverShow = <
 ): Media => ({
   ...data,
   backdrop_path: getFullTMDBImgPath(data.backdrop_path),
-  poster_path: getFullTMDBImgPath(data.poster_path),
+  poster_path: getFullTMDBImgPath(data.poster_path, "w342"),
   type: "show",
   href: routes.show(data.id),
   title: data.name,
@@ -56,7 +48,7 @@ export const mapDiscoverShow = <
 export const mapShowDetails = <T extends ShowDetails>(data: T): T & Media => ({
   ...data,
   backdrop_path: getFullTMDBImgPath(data.backdrop_path),
-  poster_path: getFullTMDBImgPath(data.poster_path),
+  poster_path: getFullTMDBImgPath(data.poster_path, "w342"),
   type: "show",
   href: routes.show(data.id),
   title: data.name,
@@ -77,3 +69,5 @@ export const showTypeMaps: Record<ShowsParamTypes, (data: any) => Media> = {
   airToday: mapDiscoverShow,
   popularLastWeek: mapDiscoverShow,
 };
+
+export const mediaTypeMaps = {...movieTypeMaps, ...showTypeMaps}

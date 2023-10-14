@@ -1,8 +1,6 @@
 "use client"
 
 import { HomeActions } from "@/stores/home";
-import { MediaDetailsActions } from "@/stores/mediaDetails";
-import { RootActions } from "@/stores/root";
 import { AppState } from "@/stores/types";
 import { DeepPartial } from "@reduxjs/toolkit";
 import { PropsWithChildren, useEffect } from "react";
@@ -10,8 +8,6 @@ import { useDispatch } from "react-redux";
 
 const actions = {
   home: HomeActions,
-  mediaDetails: MediaDetailsActions,
-	root: RootActions
 }
 
 const PassState = ({

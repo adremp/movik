@@ -29,7 +29,7 @@ const MoviesLayout = (props: Props & Params) => {
     <main className="p-page text-text-primary gap-x-20 h-full grid grid-rows-[1fr_auto] grid-cols-[1fr_auto]">
       {props[descriptionName]}
       <div className="row-span-2 h-full flex">{props[videoName]}</div>
-    </main>	
+    </main>
   );
 };
 

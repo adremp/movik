@@ -21,6 +21,7 @@ import { MovieVideosResponse } from "./types/movieVideos";
 import { ShowCast, ShowCredentialsResponse } from "./types/showCredentials";
 import { ShowDetails } from "./types/showDetails";
 import { ShowVideosResponse } from "./types/showVideos";
+import sortTrailerFirst from "./utils/sortTrailerFirst";
 
 export const fetchMedia = <R extends Record<string, any>>(
   endpoint: string,
@@ -29,7 +30,7 @@ export const fetchMedia = <R extends Record<string, any>>(
   const queryParams = new URLSearchParams(query);
   return fetch(`${urls.TMDB}${endpoint}?${queryParams}`, {
     headers: { Authorization: `Bearer ${process.env.TMDB_TOKEN}` },
-    next: { revalidate: 600 },
+    next: { revalidate: 3600 },
   }).then(async (res) => {
     const ret = await res.json();
     if (ret.success === false) notFound();
@@ -82,7 +83,7 @@ export const getMovieDetailsById = (id: number | string) =>
 
 export const getMovieVieosById = (id: string): Promise<Video[]> =>
   fetchMedia<MovieVideosResponse>(`/movie/${id}/videos`, {}).then((data) =>
-    data.results.map(mapVideo)
+    sortTrailerFirst(data.results.map(mapVideo))
   );
 
 export const getShowDetailsById = (id: number | string) =>
@@ -90,14 +91,14 @@ export const getShowDetailsById = (id: number | string) =>
 
 export const getShowVideosById = (id: number | string): Promise<Video[]> =>
   fetchMedia<ShowVideosResponse>(`/tv/${id}/videos`, {}).then((data) =>
-    data.results.map(mapVideo)
+    sortTrailerFirst(data.results.map(mapVideo))
   );
 
 export const getShowSeasonVideos = (showId: string, season: string) =>
   fetchMedia<ShowVideosResponse>(
     `/tv/${showId}/season/${season}/videos`,
     {}
-  ).then((data) => data.results.map(mapVideo));
+  ).then((data) => sortTrailerFirst(data.results.map(mapVideo)));
 
 export const getMovieCredits = (id: number | string): Promise<MovieCast[]> =>
   fetchMedia<MovieCredentialsResponse>(`/movie/${id}/credits`, {}).then(
