@@ -1,6 +1,5 @@
 import MediaBackgroundImage from "@/components/MediaBackgroundImage";
 import * as motion from "@/components/motion/components";
-import AddListButton from "@/features/AddListButton";
 import MediaLink from "@/features/MediaLink";
 import { getMovieDetailsById, getShowDetailsById } from "@/shared/api";
 import { Media } from "@/shared/api/types";
@@ -27,7 +26,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
     : (await typeFetchFn[type]())[0]["data"][0];
 
   const bgImage = media.backdrop_path || media.poster_path;
-  // console.log("movie :>> ", media);
+
   return (
     <motion.div
       initial={false}
@@ -57,26 +56,25 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           expanded: {
             gridTemplate: `"t d" max-content "i d" 0fr "a d" 1fr / 1fr 1fr `,
             marginTop: 20,
-            height: [null, "20vh", "20vh"],
+            height: [null, "23vh", "23vh"],
             display: "grid",
           },
           default: {
             gridTemplate: [
               null,
-              `"t ." "i ." "d ." "a ." 1fr / 2fr 1fr`,
-              `"t ." "i ." "d ." "a ." 1fr / 2fr 1fr`,
+              `"t ." max-content "i ." "d ." "a ." 1fr / 2fr 1fr`,
+              `"t ." max-content "i ." "d ." "a ." 1fr / 2fr 1fr`,
             ],
             height: [null, "65vh", "65vh"],
             marginTop: 55,
             display: "grid",
           },
           full: {
-            // overflow: "hidden",
             display: [null, "grid", "none"],
             height: [null, 0, 0],
           },
         }}
-        className={"z-[1] h-min overflow-hidden grid text-text-primary"}
+        className={"z-[1] h-min max-lg:overflow-hidden grid text-text-primary"}
       >
         <motion.h1
           key={media.id + "1"}

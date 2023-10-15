@@ -17,7 +17,9 @@ const ScrollWrapper = (props: ScrollWrapperProps) => {
   const ref = useOnMountEl<HTMLDivElement>({ scrollTop });
 
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    set({ mediaScrollTop: e.currentTarget.scrollTop });
+    if (e.currentTarget.scrollTop < 200) {
+			set({ mediaScrollTop: e.currentTarget.scrollTop });
+		}
   };
 
   return (

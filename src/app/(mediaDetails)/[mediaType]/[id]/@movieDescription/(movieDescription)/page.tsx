@@ -33,7 +33,7 @@ const Description = async (props: Params) => {
 
   return (
     <motion.div
-      className="flex flex-col"
+      className="flex flex-col max-lg:h-max overflow-hidden lg:overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >

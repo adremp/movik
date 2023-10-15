@@ -3,12 +3,12 @@
 import { useBreakpoint } from "@/providers/breakpoint";
 import getMatchBreakpoint from "@/shared/utils/getMatchBreakpoint";
 import { cx } from "class-variance-authority";
-import { Children, ReactNode, RefObject } from "react";
+import { Children, ReactNode, RefObject, useMemo } from "react";
 import { Swiper } from "swiper";
 import SwiperCore from "swiper/core";
 import "swiper/css";
 import { register } from "swiper/element";
-import { Mousewheel, Virtual, HashNavigation } from "swiper/modules";
+import { HashNavigation, Mousewheel, Virtual } from "swiper/modules";
 import { SwiperSlideProps } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import { ConfigScreens } from "../../config";
@@ -57,11 +57,17 @@ declare global {
 
 SwiperCore.use([Mousewheel, Virtual, HashNavigation]);
 
+type SwiperContainerAttributesWithBreakpoints = {
+  [Key in keyof SwiperContainerAttributes]: Partial<
+    Record<keyof ConfigScreens, SwiperContainerAttributes[Key]>
+  >;
+};
+
 interface ISwiperProps {
   className?: string;
-  breakpointSlides?: Partial<Record<keyof ConfigScreens, number>>;
   children: ReactNode;
   containerProps: Omit<SwiperContainerAttributes, "modules">;
+  containerPropsBreakpoints: SwiperContainerAttributesWithBreakpoints;
   sliderProps: SwiperSlideAttributes;
   sliderPropsList?: Record<string, string>[];
 }
@@ -69,16 +75,21 @@ interface ISwiperProps {
 const AppSwiper = (props: ISwiperProps) => {
   const breakpoint = useBreakpoint();
 
-  const breakpointSlides =
-    props.breakpointSlides &&
-    getMatchBreakpoint(breakpoint, props.breakpointSlides);
+  const breakpointProps = useMemo(() => {
+    return (
+      props.containerPropsBreakpoints &&
+      Object.fromEntries(
+        Object.entries(props.containerPropsBreakpoints).map(([prop, bps]) => {
+          // @ts-ignore
+          return [prop, getMatchBreakpoint(breakpoint, bps)];
+        })
+      )
+    );
+  }, [props.containerPropsBreakpoints, breakpoint]);
 
   return (
     <div className={cx("select-none", props.className)}>
-      <swiper-container
-        slides-per-view={breakpointSlides}
-        {...props.containerProps}
-      >
+      <swiper-container {...breakpointProps} {...props.containerProps}>
         {Children.map(props.children, (el, i) => (
           <swiper-slide {...props.sliderProps} {...props.sliderPropsList?.[i]}>
             {el}

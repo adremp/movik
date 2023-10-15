@@ -10,7 +10,12 @@ const Videos = async ({ params, searchParams }: Params & SearchParams) => {
     videos = await getShowVideosById(params.id);
   }
 
-  return <MediaVideos videos={videos} />;
+  return (
+    <MediaVideos
+      className="lg:row-span-2 max-lg:child:h-max max-lg:child:w-full overflow-hidden max-lg:mt-60"
+      videos={videos}
+    />
+  );
 };
 
 export default Videos;

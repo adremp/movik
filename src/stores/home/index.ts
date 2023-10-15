@@ -16,7 +16,7 @@ const initialState: HomeState = {
   animViewType: "default",
   mediaScrollTop: 0,
   fullViewLoading: false,
-	fullViewMediaResponse: {page: 0, results: [], total_pages: 0}
+  fullViewMediaResponse: { page: 0, results: [], total_pages: 0 },
 };
 
 export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
@@ -27,10 +27,15 @@ export const { actions: HomeActions, reducer: HomeReducer } = createSlice({
       ...state,
       ...payload,
     }),
-    fetchFullViewMedia: (
-      state,
-      { payload }: PayloadAction
-    ) => {
+    resetView: (state) => {
+      state.animViewType = "default";
+      state.fullViewParamType = undefined;
+      state.fullViewMediaResponse = { page: 0, results: [], total_pages: 0 };
+      state.fullViewErrorMessage = undefined;
+      state.mediaScrollTop = 0;
+      state.fullViewLoading = false;
+    },
+    fetchFullViewMedia: (state, { payload }: PayloadAction) => {
       state.fullViewLoading = true;
       state.fullViewErrorMessage = undefined;
     },

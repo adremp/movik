@@ -1,21 +1,20 @@
 import { ConfigScreens, screenEntries } from "../../../config";
 
-export default (
+export default <R,>(
   currentBreakpoint: keyof ConfigScreens,
-  breakpoints: Partial<Record<keyof ConfigScreens, any>>
-) => {
+  breakpoints: Partial<Record<keyof ConfigScreens, R>>
+	// @ts-ignore
+): R => {
   const currBpIdx = screenEntries.findIndex(([key]) => {
     return key === currentBreakpoint;
   });
 
-  if (currBpIdx === -1) return;
-
   for (
-    let i = currBpIdx === 0 ? 0 : currBpIdx - 1;
+    let i = currBpIdx;
     i < screenEntries.length;
     i++
   ) {
     const bp = breakpoints?.[screenEntries[i][0]];
-    if (bp) return bp;
+    if (bp !== undefined) return bp;
   }
 };

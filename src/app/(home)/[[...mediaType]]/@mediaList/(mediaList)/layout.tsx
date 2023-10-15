@@ -19,13 +19,8 @@ export const getType = (props: Params) =>
 
 const MediaListLayout = async (props: Params) => {
   const pageType = getType(props);
-  const mediaLists = (await typeFetchFn[pageType]()).reduce<MediaDataList[]>(
-    (acc, el: MediaDataList) => {
-      acc.push(el, el, el);
-      return acc;
-    },
-    []
-  );
+  const mediaLists = await typeFetchFn[pageType]();
+	
   return (
     <ScrollWrapper>
       <InfiniteListWrapper>

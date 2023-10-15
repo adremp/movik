@@ -16,7 +16,7 @@ const MediaBackgroundImage = (props: MediaBackgroundImageProps) => {
         animate={{ opacity: 1 }}
         {...props}
         className={
-          "absolute top-0 object-cover left-0 pointer-events-none -z-10 select-none"
+          "absolute top-0 left-0 object-center object-cover pointer-events-none -z-10 select-none"
         }
         alt=""
         priority

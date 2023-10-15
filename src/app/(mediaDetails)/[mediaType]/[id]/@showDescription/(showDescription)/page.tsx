@@ -1,4 +1,3 @@
-
 import MediaBackgroundImage from "@/components/MediaBackgroundImage";
 import MediaDescription from "@/components/MediaDescription";
 import * as motion from "@/components/motion/components";
@@ -48,7 +47,7 @@ const Description = async ({ params, searchParams }: Params & SearchParams) => {
 
   return (
     <motion.div
-      className="flex overflow-hidden w-full flex-col"
+      className="flex overflow-hidden max-lg:h-max lg:overflow-hidden w-full flex-col"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >

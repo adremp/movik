@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { BreakpointProvider } from "./breakpoint";
 import createMatchMediaProvider from "@/shared/utils/createMatchMediaProvider";
 
-export const [HoverProvider, useMatchHover, WhenMediaHover] = createMatchMediaProvider('{hover: hover}')
+export const [HoverProvider, useMatchHover, WhenMediaHover] = createMatchMediaProvider('(hover: hover)')
 
 interface AppProvidersProps extends PropsWithChildren {
   initialState?: DeepPartial<AppState>;
