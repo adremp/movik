@@ -2,14 +2,14 @@ import HoverLink from "@/components/HoverLink";
 import MediaCard from "@/components/MediaCard";
 import MediaList from "@/components/MediaList";
 import MoreVideosButton from "@/components/MoreVideosButton";
-import { MediaDataList, getMovies, getShows } from "@/shared/api";
+import { MediaDataList, getAllMedia, getMovies, getShows } from "@/shared/api";
 import { getMediaParam } from "@/shared/api/const";
 import { NavRouteKeys, Params } from "../../_types";
 import InfiniteListWrapper from "./InfiniteListWrapper";
 import ScrollWrapper from "./ScrollWrapper";
 
 export const typeFetchFn: Record<string, () => Promise<MediaDataList[]>> = {
-  index: getMovies,
+  index: getAllMedia,
   movies: getMovies,
   shows: getShows,
 } satisfies Record<NavRouteKeys, () => Promise<MediaDataList[]>>;

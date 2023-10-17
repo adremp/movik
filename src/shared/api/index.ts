@@ -4,6 +4,7 @@ import {
   MediaParam,
   MoviesParamTypes,
   ShowsParamTypes,
+  mediaParams,
   moviesParams,
   showsParams,
 } from "./const";
@@ -11,8 +12,7 @@ import {
   mapMovieDetails,
   mapShowDetails,
   mapVideo,
-  movieTypeMaps,
-  showTypeMaps,
+	mediaTypeMaps,
 } from "./maps";
 import { Media, MediaResponse, Video } from "./types";
 import { MovieCast, MovieCredentialsResponse } from "./types/movieCredentials";
@@ -49,7 +49,7 @@ export const getMovies = async (): Promise<MediaDataList[]> => {
   const movies = await Promise.all(
     moviesParams.map((p) =>
       fetchMedia<MediaResponse>(p.url, p.query).then((data) =>
-        data?.results.map(movieTypeMaps[p.type])
+        data?.results.map(mediaTypeMaps[p.type])
       )
     )
   );
@@ -65,7 +65,7 @@ export const getShows = async (): Promise<MediaDataList[]> => {
   const shows = await Promise.all(
     showsParams.map((p) =>
       fetchMedia<MediaResponse>(p.url, p.query).then((data) =>
-        data.results.map(showTypeMaps[p.type])
+        data.results.map(mediaTypeMaps[p.type])
       )
     )
   );
@@ -73,6 +73,21 @@ export const getShows = async (): Promise<MediaDataList[]> => {
     data: el,
     title: showsParams[i].title,
     type: showsParams[i].type,
+  }));
+};
+
+export const getAllMedia = async (): Promise<MediaDataList[]> => {
+  const media = await Promise.all(
+    mediaParams.map((p) =>
+      fetchMedia<MediaResponse>(p.url, p.query).then((data) =>
+        data.results.map(mediaTypeMaps[p.type])
+      )
+    )
+  );
+  return media.map((el, i) => ({
+    data: el,
+    title: mediaParams[i].title,
+    type: mediaParams[i].type,
   }));
 };
 
