@@ -41,7 +41,7 @@ const MediaListLayout = async (props: Params) => {
                 <HoverLink
                   delayMs={300}
                   key={el.id}
-                  hoverHref={`?mediaId=${el.id}`}
+                  hoverHref={`?${el.type}Id=${el.id}`}
                   href={el.href}
                 >
                   <MediaCard

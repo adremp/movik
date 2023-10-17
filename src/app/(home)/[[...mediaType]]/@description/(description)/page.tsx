@@ -9,20 +9,26 @@ import pill from "@/shared/styles/pill";
 import text from "@/shared/styles/text";
 import dayjs from "dayjs";
 import { getType, typeFetchFn } from "../../@mediaList/(mediaList)/layout";
-import { NavRouteKeys, Params, SearchParams } from "../../_types";
+import { Params, SearchParams } from "../../_types";
 
-const nullMediaIdFetchFn: Record<string, (id: string) => Promise<Media>> = {
-  index: getMovieDetailsById,
-  movies: getMovieDetailsById,
-  shows: getShowDetailsById,
-} satisfies Record<NavRouteKeys, (id: string) => Promise<Media>>;
+const nullMediaIdFetchFn: Record<
+  keyof SearchParams["searchParams"],
+  (id: string) => Promise<Media>
+> = {
+  movieId: getMovieDetailsById,
+  showId: getShowDetailsById,
+};
 
 const DescriptionPage = async (props: SearchParams & Params) => {
-  const id = props.searchParams.mediaId;
+  const { movieId, showId } = props.searchParams;
   const type = getType(props);
 
-  const media = id
-    ? await nullMediaIdFetchFn[type](id)
+  const fetchPromise =
+    (movieId && nullMediaIdFetchFn["movieId"](movieId)) ||
+    (showId && nullMediaIdFetchFn["showId"](showId));
+		
+  const media = fetchPromise
+    ? await fetchPromise
     : (await typeFetchFn[type]())[0]["data"][0];
 
   const bgImage = media.backdrop_path || media.poster_path;
