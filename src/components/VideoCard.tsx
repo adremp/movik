@@ -3,9 +3,10 @@
 import * as motion from "@/components/motion/components";
 import PlayIcon from "@/shared/assets/play_bg.svg";
 import effect from "@/shared/styles/effect";
+import skeleton from "@/shared/styles/skeleton";
 import text from "@/shared/styles/text";
 import Image from "next/image";
-import { IframeHTMLAttributes, useState } from "react";
+import { useState } from "react";
 
 interface VideoCardProps {
   className?: string;
@@ -26,6 +27,7 @@ const VideoCard = (props: VideoCardProps) => {
         "aspect-[16/9] h-full group flex relative overflow-hidden rounded-12"
       }
     >
+      <div className={skeleton({ variant: "primary" }, "-z-10 absolute")}></div>
       {isActive ? (
         <iframe
           width={"100%"}

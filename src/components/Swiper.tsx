@@ -88,7 +88,12 @@ const AppSwiper = (props: ISwiperProps) => {
   }, [props.containerPropsBreakpoints, breakpoint]);
 
   return (
-    <div className={cx("select-none", props.className)}>
+    <div
+      className={cx(
+        "select-none",
+        props.className
+      )}
+    >
       <swiper-container {...breakpointProps} {...props.containerProps}>
         {Children.map(props.children, (el, i) => (
           <swiper-slide {...props.sliderProps} {...props.sliderPropsList?.[i]}>

@@ -39,7 +39,7 @@ const ScrollController = (props: ScrollProps) => {
 
   return (
     <motion.div
-      className="w-full h-full touch-none"
+      className="w-full relative h-full touch-none"
       onWheel={scrollTop < 10 ? onWheel : undefined}
       onPointerDown={withPointer ? onDown : undefined}
       onPointerMove={withPointer ? onMove : undefined}

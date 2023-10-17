@@ -1,9 +1,14 @@
-import * as motion from "@/components/motion/components";
-import { cx } from "class-variance-authority";
-import { Variant } from "framer-motion";
-import { PropsWithChildren, useState } from "react";
+"use client";
 
-interface AnimLoadProps extends PropsWithChildren {
+import * as motion from "@/components/motion/components";
+import { HTMLMotionProps, Variant } from "framer-motion";
+import { useState } from "react";
+
+interface AnimLoadProps
+  extends Omit<
+    HTMLMotionProps<"div">,
+    "variants" | "className" | "animate" | "onLoad"
+  > {
   className?: string;
   variants: Record<"load" | "default", Variant>;
 }
@@ -15,8 +20,9 @@ const AnimLoad = (props: AnimLoadProps) => {
     <motion.div
       onLoad={() => setLoaded(true)}
       animate={isLoaded ? "default" : "load"}
-      variants={props.variants}
-      className={cx(props.className)}
+      {...props}
+      // variants={props.variants}
+      // className={cx(props.className)}
     >
       {props.children}
     </motion.div>

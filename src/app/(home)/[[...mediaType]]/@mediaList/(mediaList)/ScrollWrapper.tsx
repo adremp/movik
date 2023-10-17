@@ -27,13 +27,14 @@ const ScrollWrapper = (props: ScrollWrapperProps) => {
       ref={ref}
       onScroll={onScroll}
       initial={false}
+			transition={{type: "spring", bounce: 0.1, duration: 0.3}}
       variants={{
-        expanded: { marginTop: 40 },
-        full: { marginTop: 0 },
-        default: { marginTop: 85 },
+        expanded: { translateY: "35vh", maxHeight: '65%' },
+        full: { translateY: "0vh", maxHeight: "100%" },
+        default: { translateY: "100vh", maxHeight: '100%' },
       }}
       className={cx(
-        "flex flex-col relative scrollbar w-page grow gap-15 mt-85",
+        "absolute top-0 bottom-0 right-0 left-0 scrollbar grow gap-15",
         animViewType !== "default" ? "overflow-y-auto" : "overflow-hidden"
       )}
     >

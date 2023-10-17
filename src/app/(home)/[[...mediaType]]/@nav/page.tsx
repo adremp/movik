@@ -26,7 +26,7 @@ const Nav = (props: Params) => {
         full: { fontSize: "25px", maxHeight: "0%", opacity: 0 },
         default: { fontSize: "40px", maxHeight: "100%", opacity: 1 },
       }}
-      className={"inline-flex text-text-primary gap-23"}
+      className={"inline-flex mt-page mx-page text-text-primary gap-23"}
     >
       {items.map(([title, routeType]) => (
         <Link

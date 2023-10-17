@@ -7,8 +7,11 @@ body {
 }
 
 @layer utilities {
-	.p-page {
-		@apply px-20 py-20 md:px-40 lg:py-40 lg:px-80
+	.mx-page {
+		@apply mx-20 md:mx-40 lg:mx-80
+	}
+	.mt-page {
+		@apply mt-10 md:mt-20 lg:mt-40
 	}
 	.w-page {
 		@apply w-[calc(40px+100%)] ml-[-20px] md:ml-[-40px] lg:ml-[-80px] md:w-[calc(80px+100%)] lg:w-[calc(160px+100%)]

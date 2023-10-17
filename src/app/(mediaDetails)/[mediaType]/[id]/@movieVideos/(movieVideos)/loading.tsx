@@ -1,9 +1,9 @@
-import text from "@/shared/styles/text";
+import skeleton from "@/shared/styles/skeleton";
 
 interface VideosLoadingProps {}
 
 const VideosLoading = (props: VideosLoadingProps) => {
-  return <div className={text({ size: "100" })}>VideosLoading</div>;
+  return <div className={skeleton({ variant: "primary" })}></div>;
 };
 
 export default VideosLoading;

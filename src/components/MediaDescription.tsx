@@ -20,7 +20,11 @@ const MediaDescription = (props: MediaDescriptionProps) => {
       className={cx("z-[1]", props.className)}
     >
       <h1
-        className={text({ size: "100" }, props.title.length > 15 && "text-70")}
+        className={text(
+          { size: "100" },
+          "max-md:text-70",
+          props.title.length > 15 && "text-70"
+        )}
       >
         {props.title}
       </h1>

@@ -30,6 +30,7 @@ const DescriptionPage = async (props: SearchParams & Params) => {
   return (
     <motion.div
       initial={false}
+      className="mx-page"
       variants={{
         full: {
           display: ["block", "none"],
@@ -55,23 +56,20 @@ const DescriptionPage = async (props: SearchParams & Params) => {
         variants={{
           expanded: {
             gridTemplate: `"t d" max-content "i d" 0fr "a d" 1fr / 1fr 1fr `,
-            marginTop: 20,
-            height: [null, "23vh", "23vh"],
+            marginTop: [null, 20, 20],
             display: "grid",
           },
           default: {
             gridTemplate: [
               null,
-              `"t ." max-content "i ." "d ." "a ." 1fr / 2fr 1fr`,
-              `"t ." max-content "i ." "d ." "a ." 1fr / 2fr 1fr`,
+              `"t" max-content "i" "d" "a" 1fr`,
+              `"t" max-content "i" "d" "a" 1fr`,
             ],
-            height: [null, "65vh", "65vh"],
-            marginTop: 55,
+            marginTop: [null, 55, 55],
             display: "grid",
           },
           full: {
             display: [null, "grid", "none"],
-            height: [null, 0, 0],
           },
         }}
         className={"z-[1] h-min max-lg:overflow-hidden grid text-text-primary"}
@@ -81,13 +79,12 @@ const DescriptionPage = async (props: SearchParams & Params) => {
           transition={{ fontSize: { duration: 0 } }}
           initial={false}
           variants={{
-            expanded: { fontSize: "40px", opacity: [0, 0, 1] },
-            default: { fontSize: "100px", opacity: [0, 0, 1] },
+            expanded: { fontSize: "var(--text-min)", opacity: [0, 0, 1] },
+            default: { fontSize: "var(--text-max)", opacity: [0, 0, 1] },
           }}
-          exit={{ opacity: 0 }}
           className={text(
             { size: "100" },
-            "overflow-hidden text-ellipsis break-words line-clamp-2 text-[inherit] ga-[t]"
+            "overflow-hidden [--text-min:30px] md:[--text-min:50px] [--text-max:60px] md:[--text-max:100px] text-ellipsis break-words line-clamp-2 ga-[t]"
           )}
         >
           {media.title}
@@ -115,7 +112,10 @@ const DescriptionPage = async (props: SearchParams & Params) => {
             expanded: { opacity: [0, 0, 1], marginLeft: 20, marginTop: 0 },
             default: { opacity: [0, 0, 1], marginTop: 19, marginLeft: 0 },
           }}
-          className={text({ size: "20-400" }, "ga-[d] h-min line-clamp-5")}
+          className={text(
+            { size: "20-400" },
+            "ga-[d] max-w-[65ch] h-min line-clamp-5"
+          )}
         >
           {media.overview}
         </motion.p>

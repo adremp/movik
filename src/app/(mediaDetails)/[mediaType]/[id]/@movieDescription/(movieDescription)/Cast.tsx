@@ -1,8 +1,8 @@
 import { getMovieCredits, getShowCredits } from "@/shared/api";
+import action from "@/shared/styles/action";
 import text from "@/shared/styles/text";
 import Link from "next/link";
 import { MediaTypeParams } from "../../../layout";
-import action from "@/shared/styles/action";
 
 const mapTypeFn = {
   movie: getMovieCredits,

@@ -26,7 +26,8 @@ const MoviesLayout = (props: Props & Params) => {
   const videoName = mapVideos[mediaType];
 
   return (
-    <main className="p-page text-text-primary grid gap-x-20 max-lg:overflow-auto grid-rows-[1fr_max-content] h-full lg:grid-rows-[1fr_auto] lg:grid-cols-[1fr_auto]">
+    <main className="mx-page py-20 text-text-primary grid gap-x-20 max-lg:overflow-auto grid-rows-[1fr_max-content] h-full lg:grid-rows-[1fr_auto] lg:grid-cols-[2fr_1fr]">
+    {/* <main className="mx-page py-20 text-text-primary grid gap-x-20 max-lg:overflow-auto grid-rows-[1fr_max-content] h-full lg:grid-rows-[1fr_auto] lg:grid-cols-[1fr_auto]"> */}
       {props[descriptionName]}
       {props[videoName]}
     </main>
